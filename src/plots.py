@@ -1,19 +1,14 @@
 import altair as alt
 import pandas as pd
-import streamlit as st
 import locale as loc
 
 from translation import Translate
 from data import Data
 
-
-def line_plots(lang: str, mode: str = "total") -> None:
+def line_plots(data: Data, t: Translate, mode: str = "total") -> None:
     """
     Render line plots. Takes a data argument that usually comes from utils.get_data()
     """
-
-    data = Data(lang)
-    t = Translate(lang)
 
     st.title(t.title)
 
