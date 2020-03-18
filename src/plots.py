@@ -5,16 +5,14 @@ import locale as loc
 
 from translation import Translate
 from data import Data
+import time
 
-
-def line_plots(lang: str, mode: str = "total") -> None:
+def line_plots(data: Data, t: Translate, mode: str = "total") -> None:
     """
     Render line plots. Takes a data argument that usually comes from utils.get_data()
     """
 
-    data = Data(lang)
-    t = Translate(lang)
-
+    start_time = time.time()
     st.title(t.title)
 
     st.markdown(t.md_data_to_visualize)
@@ -121,3 +119,5 @@ def line_plots(lang: str, mode: str = "total") -> None:
         st.warning(t.warnings_no_sel_region)
     else:
         st.write(regional_growth_chart)
+
+    print("--- %s seconds ---" % (time.time() - start_time))
