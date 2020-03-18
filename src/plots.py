@@ -1,5 +1,6 @@
 import altair as alt
 import pandas as pd
+import streamlit as st
 import locale as loc
 
 from translation import Translate
