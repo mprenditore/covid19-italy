@@ -1,6 +1,6 @@
 # COVID-19 in Italy
 
-> This is a fork from the original project.
+> This is a fork from the original project. I would like to thank the original developer [tommasobonomo](https://covid19dashboards.com) for his work.
 >
 > Original forking reasons include refactored code to use classes and improved translations and performances
 >
