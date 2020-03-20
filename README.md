@@ -10,8 +10,7 @@ Quick streamlit dashboard to visualise the impact of COVID-19 in Italy
 
 ## Demos
 
-* Check out this [link](http://covid19italy.herokuapp.com/), it is quite a bit slow as it's hosted on Heroku's free tier.
-* This other [link](https://covid19italy.crisidev.org/) is available on a more powerful machine.
+A demo site can be found at the following link [link](http://covid-19.electro.tips/).
 
 ## Install and run
 
@@ -22,10 +21,10 @@ Quick streamlit dashboard to visualise the impact of COVID-19 in Italy
 
 ## Docker
 
-A docker image for x86 is available [here](https://hub.docker.com/r/crisidev/covid19-italia):
+A docker image is available [here](https://hub.docker.com/r/mprenditore/covid-19-ita-dashboard):
 
 ```sh
-docker run -p 8501:8501 crisidev/covid19-italia:linux-x86
+docker run -p 8501:8501 mprenditore/covid-19-ita-dashboard:latest
 ```
 
 ## Translations
