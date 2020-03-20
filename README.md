@@ -1,5 +1,11 @@
 # COVID-19 in Italy
 
+> This is a fork from the original project.
+>
+> Original forking reasons include refactored code to use classes and improved translations and performances
+>
+> The original project can be found [here](https://github.com/tommasobonomo/covid19-italy/)
+
 Quick streamlit dashboard to visualise the impact of COVID-19 in Italy
 
 ## Demos
