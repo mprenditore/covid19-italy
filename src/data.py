@@ -119,6 +119,8 @@ class Data:
                 region = self.calculate_delta(region, feature)
                 region = self.calculate_growth(region, feature)
             regions_array.append(region)
+        if len(regions_array) == 0:
+            return pd.DataFrame()
         return pd.concat(regions_array).reset_index(drop=True)
 
 

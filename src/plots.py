@@ -97,7 +97,7 @@ def line_plots(data: Data, t: Translate, mode: str = "total") -> None:
         t.axis_region
     )
     if selected_regions.empty:
-        st.warning(t.warning_no_sel_region)
+        st.warning(t.warnings_no_sel_region)
     else:
         st.write(regional_chart)
 
