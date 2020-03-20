@@ -1,7 +1,9 @@
 title: "COVID-19 in Italia"
 sidebar_github: "Per contribuire o visualizzare il codice, visita [github](https://github.com/mprenditore/covid19-italy)"
 
-md_available_visualizations: "Visualizzaioni disponibili"
+title_page: "Pagina"
+title_visualizations: "Visualizzaioni disponibili"
+
 md_visualizations_description: "Scegli se preferisci visualizzare il totale dell'indicatiore scelto o l'incremento/decremento giornaliero:"
 md_data_to_visualize: "Che dato vorresti visualizzare?"
 md_national_data: "Dati nazionali"
@@ -12,6 +14,7 @@ md_growth_factor_description_1: "Il fattore di crescita è il moltiplicatore del
 md_growth_factor_description_2: "
   dove $casi_n$ indica il numero di casi per il giorno $n$. Ad esempio, se ieri fossero stati registrati 300 casi
   e oggi 400, il fattore di crescita sarebbe 1.33, dato che $\\frac{400}{300} = 1.33$."
+md_elapsed_days: "Scegli che data visualizzare come numero di giorni dalla prima raccolta dati, il 24 febbraio:"
 md_footer: |
   Tutti i dati visualizzati in questa dashboard provengono dal Ministero della Salute e sono forniti dal
   Dipartimento della Protezione Civile. Questo progetto è quindi un derivato di [COVID-19 Italia - Monitoraggio
@@ -23,17 +26,22 @@ label_choose: "Scegli..."
 label_national_scale: Scala Nazionale
 label_regional_scale: Scala Regionale
 label_regions: Regioni
+label_days: Giorni
+label_page: Pagina
+
 
 opt_total: totale
 opt_day_to_day: "giorno per giorno"
 opt_linear: lineare
 opt_logarithmic: logaritmica
+opt_temporal_trend: "Andamento temporale"
+opt_geo_distribution: "Distribuzione geografica"
 
 feature_hospitalized_with_symptoms: "Ricoverati con sintomi"
 feature_people_in_icu: "Terapia intensiva"
 feature_total_hospitalized: "Totale ospedalizzati"
 feature_people_in_domestic_isolation: "Isolamento domiciliare"
-feature_total_of_current_positives: "Totale attualmente positivi"
+feature_total_current_positives: "Totale attualmente positivi"
 feature_new_current_positives: "Nuovi attualmente positivi"
 feature_people_discharged_and_recovered: "Dimessi guariti"
 feature_deaths: "Deceduti"
@@ -49,8 +57,10 @@ axis_region: Regione
 str_date: Data
 str_warnings: "Avvisi:"
 str_cases: casi
+str_chosen_date: "Data scelta"
 
 warnings_no_sel_region: "Nessuna regione selezionata!"
+warnings_no_info_for_sel_date: "Nessuna informatione disponibile per la data selezionata"
 warnings_updates: |
   - 07/03/2020: dati Brescia +300 esiti positivi
   - 10/03/2020: dati Regione Lombardia parziali.
