@@ -1,9 +1,10 @@
+import datetime
 import pandas as pd
-import altair as alt
 from typing import List
 from translation import Translate
 from cachetools import cached, TTLCache
 cache = TTLCache(maxsize=10, ttl=60)
+
 
 @cached(cache)
 class Data:
@@ -14,8 +15,10 @@ class Data:
     regions_data = None
     regions_list = None
     t = None
+    n_days = 0
     features = []
     extended_features = []
+
     def __init__(self, lang: str = "English"):
         self.data = self.get_data()
         self.features = self.get_features()
@@ -25,7 +28,7 @@ class Data:
         _data = pd.read_csv(self.csv_url)
         # Remove the time and just focus on the date
         _data["data"] = pd.to_datetime(_data["data"]).apply(lambda x: x.date())
-        self.data = _data.rename(columns = {
+        self.data = _data.rename(columns={
             "data": "date",
             "stato": "state",
             "codice_regione": "region_code",
@@ -34,13 +37,14 @@ class Data:
             "terapia_intensiva": "feature_people_in_icu",
             "totale_ospedalizzati": "feature_total_hospitalized",
             "isolamento_domiciliare": "feature_people_in_domestic_isolation",
-            "totale_attualmente_positivi": "feature_total_of_current_positives",
+            "totale_attualmente_positivi": "feature_total_current_positives",
             "nuovi_attualmente_positivi": "feature_new_current_positives",
             "dimessi_guariti": "feature_people_discharged_and_recovered",
             "deceduti": "feature_deaths",
             "totale_casi": "feature_total_cases",
             "tamponi": "feature_total_tests"
         })
+        self.data = self.calculate_days_passed(self.data)
         self.get_features()
         self.aggregate_data()
         self.get_total_regions_data()
@@ -50,7 +54,8 @@ class Data:
 
     def get_features(self) -> List[str]:
         """
-        Gets features from data, i.e. all columns except date, state, region_code, region_name, lat, long
+        Gets features from data, i.e. all columns except date, state,
+            region_code, region_name, lat, long
         """
         self.features = self.data.drop(
             columns=[
@@ -60,10 +65,10 @@ class Data:
                 "region_name",
                 "lat",
                 "long",
+                "days_passed"
             ]
         ).columns.tolist()
         return self.features
-
 
     def calculate_delta(self, data, feature: str):
         suffix = "delta"
@@ -80,16 +85,27 @@ class Data:
         self.extended_features.append(f"{feature}_{suffix}")
         return data
 
+    def calculate_days_passed(self, data):
+        data["days_passed"] = data["date"].apply(
+            lambda x: (x - datetime.date(2020, 2, 24)).days
+        )
+        self.n_days = data["days_passed"].unique().shape[0] - 1
+        return data
 
     def aggregate_data(self):
         self.extended_features = self.features.copy()
         self.aggregated_data = self.data.groupby("date", as_index=False).sum()
         for feature in self.features:
-            self.aggregated_data = self.calculate_delta(self.aggregated_data, feature)
-            self.aggregated_data = self.calculate_growth(self.aggregated_data, feature)
+            self.aggregated_data = self.calculate_delta(
+                self.aggregated_data, feature)
+            self.aggregated_data = self.calculate_growth(
+                self.aggregated_data, feature)
+        self.aggregated_data = self.calculate_days_passed(self.aggregated_data)
         self.aggregated_data = self.aggregated_data.dropna()
         return self.aggregated_data
 
+    def get_on_days_passed(self, data, days):
+        return data[data["days_passed"] == days]
 
     def get_total_regions_data(self):
         self.total_regions_data = self.data.groupby(
@@ -97,16 +113,13 @@ class Data:
         ).sum()
         return self.total_regions_data
 
-
     def get_regions_data(self):
         self.regions_data = self.total_regions_data.groupby("region_name")
         return self.regions_data
 
-
     def get_regions_list(self):
         self.regions_list = self.data["region_name"].unique().tolist()
         return self.regions_list
-
 
     def get_selected_regions_data(self, regions: List[str]):
         _selected_regions = self.total_regions_data[
@@ -122,81 +135,3 @@ class Data:
         if len(regions_array) == 0:
             return pd.DataFrame()
         return pd.concat(regions_array).reset_index(drop=True)
-
-
-    def formatter(self, name: str, suffix: str = "") -> str:
-        if suffix == "":
-            return self.t.get(f"{name}")
-        return " - ".join([
-                self.t.get(f"{name}"),
-                self.t.get(f"suffix_{suffix}")
-            ])
-
-
-    def generate_global_chart(self,
-        data: pd.DataFrame,
-        feature: str,
-        suffix: str,
-        scale: alt.Scale,
-        title: str,
-        padding: int = 5,
-        width: int = 700,
-        height: int = 500,
-    ):
-        y_axis = feature if suffix == "" else f"{feature}_{suffix}"
-        return (
-            alt.Chart(data)
-            .mark_line(point=True)
-            .encode(
-                x=alt.X("date:T", title=title),
-                y=alt.Y(f"{y_axis}:Q",
-                    title=self.formatter(feature, suffix), scale=scale),
-                tooltip=[
-                    alt.Tooltip(f"{feature}", title=self.formatter(feature)),
-                    alt.Tooltip("date", title=self.t.str_date, type="temporal"),
-                ],
-            )
-            .configure_scale(continuousPadding=padding)
-            .properties(width=width, height=height)
-            .interactive()
-        )
-
-
-    def generate_regional_chart(self,
-        data: pd.DataFrame,
-        feature: str,
-        suffix: str,
-        scale: alt.Scale,
-        title: str,
-        alt_title: str,
-        padding: int = 5,
-        width: int = 700,
-        height: int = 500,
-        legend_position: str = "top-left",
-    ):
-        y_axis = feature if suffix == "" else f"{feature}_{suffix}"
-        return (
-            alt.Chart(data)
-            .mark_line(point=True)
-            .encode(
-                x=alt.X("date:T", title=title),
-                y=alt.Y(f"{y_axis}:Q", title=self.formatter(feature, suffix), scale=scale),
-                color=alt.Color("region_name:N", title=alt_title),
-                tooltip=[
-                    alt.Tooltip("region_name", title=alt_title),
-                    alt.Tooltip(f"{feature}", title=self.formatter(feature, suffix)),
-                    alt.Tooltip("date", title=self.t.str_date, type="temporal"),
-                ],
-            )
-            .configure_legend(
-                fillColor="white",
-                strokeWidth=3,
-                strokeColor="#f63366",
-                cornerRadius=5,
-                padding=10,
-                orient=legend_position,
-            )
-            .configure_scale(continuousPadding=padding)
-            .properties(width=width, height=height)
-            .interactive()
-        )

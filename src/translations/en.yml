@@ -1,7 +1,9 @@
 title: "COVID-19 in Italy"
 sidebar_github: "To contribute or view the code, please see [github](https://github.com/mprenditore/covid19-italy)"
 
-md_available_visualizations: "Available visualizations"
+title_page: Page
+title_visualizations: "Available visualizations"
+
 md_visualizations_description: "Choose if you prefer to visualize the total of the chosen indicator or the day-to-day increment or decrement:"
 md_data_to_visualize: "What indicator would you like to visualize?"
 md_national_data: "National data"
@@ -12,6 +14,7 @@ md_growth_factor_description_1: "The growth factor is the multiplier of the expo
 md_growth_factor_description_2: "
   where $cases_n$ stands for the number of cases registered on day $n$. For example, if 300 cases were registered
   yesterday and 400 today, the growth factor would be 1.33, as $\\frac{400}{300} = 1.33$."
+md_elapsed_days: "Choose what date to visualise as the number of days elapsed since the first data collection, on 24th February:"
 md_footer: |
   All the data displayed in this dashboard is provided by the Italian Ministry of Health
   (Ministero della Salute) and elaborated by Dipartimento della Protezione Civile. This work is therefore
@@ -23,17 +26,20 @@ label_choose: "Choose..."
 label_national_scale: National scale
 label_regional_scale: Regional scale
 label_regions: Regions
+label_days: Days
 
 opt_total: total
 opt_day_to_day: "day to day"
 opt_linear: linear
 opt_logarithmic: logarithmic
+opt_temporal_trend: "Temporal trend"
+opt_geo_distribution: "Geographical distribution"
 
 feature_hospitalized_with_symptoms: "Hospitalized with symptoms"
 feature_people_in_icu: "People in ICU"
 feature_total_hospitalized: "Total hospitalized"
 feature_people_in_domestic_isolation: "People in domestic isolation"
-feature_total_of_current_positives: "Total of current positives"
+feature_total_current_positives: "Total of current positives"
 feature_new_current_positives: "New current positives"
 feature_people_discharged_and_recovered: "People discharged and recovered"
 feature_deaths: "Deaths"
@@ -49,8 +55,10 @@ axis_region: Region
 str_date: Date
 str_warnings: "Warnings:"
 str_cases: cases
+str_chosen_date: "Chosen date"
 
 warnings_no_sel_region: "No selected region!"
+warnings_no_info_for_sel_data: "No information is available for the selected date"
 warnings_updates: |
   - 07/03/2020: data from Brescia +300 positive results
   - 10/03/2020: data from Lombardia is partial.
