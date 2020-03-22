@@ -7,7 +7,7 @@ from translation import Languages, Translate
 langs = Languages()
 
 st.sidebar.title("Language")
-language = st.sidebar.radio(label="", options=langs.get_array(), index=1)
+language = st.sidebar.radio(label="", options=langs.get_array(), index=0)
 
 data = Data(language)
 t = Translate(language)
