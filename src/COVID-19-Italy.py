@@ -18,21 +18,9 @@ page = st.sidebar.selectbox(
     index=0
 )
 
-st.sidebar.title(t.title_visualizations)
-st.sidebar.markdown(t.md_visualizations_description)
-data_rate = st.sidebar.radio(label=t.label_visualizations,
-                             options=[t.opt_total, t.opt_day_to_day])
-st.sidebar.title(t.sidebar_github)
-
-if data_rate == t.opt_total:
-    data_rate = "total"
-else:
-    if data_rate == t.opt_day_to_day:
-        data_rate = "day-to-day"
-
 st.text(f"{t.str_latest_update}: {data.latest_update}")
 
-pages = Page(data, t, mode=data_rate)
+pages = Page(data, t)
 page_function_mapping = {
     t.opt_temporal_trend: pages.line_plots,
     t.opt_geo_distribution: pages.map_choropleth,
@@ -43,3 +31,4 @@ st.subheader(t.str_warnings)
 st.warning(t.warnings_updates)
 
 st.markdown(t.md_footer)
+st.sidebar.title(t.sidebar_github)

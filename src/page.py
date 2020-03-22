@@ -14,12 +14,11 @@ class Page:
     data = None
     t = None
     graph = None
-    mode = ""
+    data_rate = ""
 
-    def __init__(self, data: Data, t: Translate, mode: str = "total"):
+    def __init__(self, data: Data, t: Translate):
         self.data = data
         self.t = t
-        self.mode = mode
         self.graph = Graph(data, t)
 
     def dropdown_scale(self):
@@ -42,6 +41,20 @@ class Page:
         )
         return scale
 
+    def radio_data_rate(self):
+        st.sidebar.title(self.t.title_visualizations)
+        st.sidebar.markdown(self.t.md_visualizations_description)
+        data_rate = st.sidebar.radio(
+                label=self.t.label_visualizations,
+                options=[self.t.opt_total, self.t.opt_day_to_day])
+
+        if data_rate == self.t.opt_total:
+            self.data_rate = "total"
+        else:
+            if data_rate == self.t.opt_day_to_day:
+                self.data_rate = "day-to-day"
+        return self.data_rate
+
     def line_plots(self) -> None:
         """
         Render line plots.
@@ -50,6 +63,7 @@ class Page:
 
         st.title(self.t.title)
 
+        self.radio_data_rate()
         feature = self.dropdown_scale()
 
         # Group data by date and calculate log of interested feature
@@ -58,7 +72,7 @@ class Page:
         national_scale = self.radio_scale(self.t.label_national_scale)
 
         st.header(self.t.md_national_data)
-        suffix = "" if self.mode == "total" else "delta"
+        suffix = "" if self.data_rate == "total" else "delta"
 
         national_chart = self.graph.render_global_chart(
             national, feature, suffix, national_scale, self.t.axis_month_day)
@@ -97,7 +111,7 @@ class Page:
 
         regional_scale = self.radio_scale(self.t.label_regional_scale)
 
-        suffix = "" if self.mode == "total" else "delta"
+        suffix = "" if self.data_rate == "total" else "delta"
 
         st.subheader(self.t.md_regional_data)
 
