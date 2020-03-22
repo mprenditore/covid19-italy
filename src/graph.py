@@ -44,7 +44,8 @@ class Graph:
                 y=alt.Y(f"{y_axis}:Q",
                         title=self.formatter(feature, suffix), scale=scale),
                 tooltip=[
-                    alt.Tooltip(f"{feature}", title=self.formatter(feature)),
+                    alt.Tooltip(f"{y_axis}",title=self.formatter(
+                        feature, suffix)),
                     alt.Tooltip("date", title=self.t.str_date, type="temporal")
                 ]
             )
@@ -77,7 +78,7 @@ class Graph:
                 color=alt.Color("region_name:N", title=alt_title),
                 tooltip=[
                     alt.Tooltip("region_name", title=alt_title),
-                    alt.Tooltip(f"{feature}", title=self.formatter(
+                    alt.Tooltip(f"{y_axis}", title=self.formatter(
                         feature, suffix)),
                     alt.Tooltip("date", title=self.t.str_date, type="temporal")
                 ]
