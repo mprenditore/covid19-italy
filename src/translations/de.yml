@@ -1,0 +1,69 @@
+title: "COVID-19 in Italien"
+sidebar_github: "Besuchen Sie [github](https://github.com/mprenditore/covid19-italy), um einen Beitrag zu leisten oder den Code anzuzeigen"
+
+title_page: Seite
+title_visualizations: "Verfügbare Visualisierungen"
+
+md_visualizations_description: "Wählen Sie, ob Sie lieber die Summe des ausgewählten Indikators oder das tägliche Inkrementieren oder Dekrementieren visualisieren möchten:"
+md_data_to_visualize: "Welchen Indikator möchten Sie visualisieren?"
+md_national_data: "Nationale Daten"
+md_regional_data: "Regionale Daten"
+md_growth_factor: "Wachstumsfaktor"
+md_per_region: "Situation in verschiedenen Regionen"
+md_growth_factor_description_1: "Der Zuwachsfaktor is der multiplikant der exponentiellen Wachstumskurve, welcher so ausgerechnet wird:"
+md_growth_factor_description_2: "
+  wo $cases_n$ für die Anzahl der eingetragenen Fällen, am $n$, steht. Beispielsweise, wenn 300 Fälle gestern eingetragen
+  worden sind und heute 400, ist der Wachstumsfaktor 1.33, weil $\\frac{400}{300} = 1.33$."
+md_elapsed_days: "Wählen Sie das Datum aus, welches als Anzahl der Tage angezeigt werden soll, die seit der ersten Datenerfassung am 24. Februar vergangen sind:"
+md_footer: |
+  Alle gegevens in dit dashboard zijn afkomstig van het Italiaanse ministerie van Volksgezondheid
+  (Ministero della Salute) en uitgewerkt door Dipartimento della Protezione Civile. Dit werk is dan ook
+  een afgeleide van [COVID-19 Italia - Monitoraggio situazione] (https://github.com/pcm-dpc/COVID-19) gelicentieerd
+  onder [CC BY 4.0] (https://creativecommons.org/licenses/by/4.0/)
+
+label_visualizations: "Verfügbare Visualisierungen"
+label_choose: "Wähle..."
+label_national_scale: Nationale Skala
+label_regional_scale: Regionale Skala
+label_regions: Regionen
+label_days: Tage
+
+opt_total: Insgesamt
+opt_day_to_day: "Tag zu Tag"
+opt_linear: linear
+opt_logarithmic: logarithmisch
+opt_temporal_trend: "Zeitlicher Trend"
+opt_geo_distribution: "Geografische Verteilung"
+
+feature_hospitalized_with_symptoms: "In das Krankenhaus eingelieferten mit symptome"
+feature_people_in_icu: "Leute in Intensivstation"
+feature_total_hospitalized: "Gesamtanzahl der ins Krankenhaus eingelieferten"
+feature_people_in_domestic_isolation: "Menschen in häuslicher Isolation"
+feature_total_current_positives: "Gesamtanzahl der positiven Fälle"
+feature_new_current_positives: "Neue aktuelle positive Fälle"
+feature_people_discharged_and_recovered: "Entlassen und erholte Menschen"
+feature_deaths: "Todesfälle"
+feature_total_cases: "Insgesamte Fälle"
+feature_total_tests: "Tests"
+
+suffix_delta: Delta
+suffix_growth: Wachstum
+
+axis_month_day: "Tag und Monat"
+axis_region: Region
+
+str_date: Datum
+str_warnings: "Warnungen:"
+str_cases: Fälle
+str_chosen_date: "Gewähltes datum"
+
+warnings_no_sel_region: "Keine region ausgewählt!"
+warnings_no_info_for_sel_data: "Keine Informationen verügbar für das ausgewählte Datum"
+
+warnings_updates: |
+  - 07/03/2020: gegevens van Brescia +300 positieve resultaten
+  - 10/03/2020: gegevens uit Lombardia zijn gedeeltelijk.
+  - 11/03/2020: gegevens van Abruzzo zijn niet doorgekomen.
+  - 16/03/2020: gegevens van P.A. Trento en Puglia kwamen niet door.
+  - 17/03/2020: gegevens van de provincie Rimini worden niet bijgewerkt.
+  - 18/03/2020: gegevens van Campania en provincie Parma zijn niet doorgekomen.
