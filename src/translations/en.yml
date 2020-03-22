@@ -27,6 +27,7 @@ label_national_scale: National scale
 label_regional_scale: Regional scale
 label_regions: Regions
 label_days: Days
+label_page: Page
 
 opt_total: total
 opt_day_to_day: "day to day"
