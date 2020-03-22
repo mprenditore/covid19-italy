@@ -56,6 +56,7 @@ str_date: Datum
 str_warnings: "Warnungen:"
 str_cases: Fälle
 str_chosen_date: "Gewähltes datum"
+str_latest_update: "Laatste update"
 
 warnings_no_sel_region: "Keine region ausgewählt!"
 warnings_no_info_for_sel_data: "Keine Informationen verügbar für das ausgewählte Datum"

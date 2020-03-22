@@ -18,6 +18,7 @@ class Data:
     n_days = 0
     features = []
     extended_features = []
+    latest_update = "1970-01-01 00:00:00"
 
     def __init__(self, lang: str = "English"):
         self.data = self.get_data()
@@ -25,10 +26,21 @@ class Data:
         self.t = Translate(lang)
 
     def get_data(self):
-        _data = pd.read_csv(self.csv_url)
+        self.data = pd.read_csv(self.csv_url)
+        self.normalize_data_pcm_dpc()
+        self.get_latest_update()
+        self.normalize_date()
         # Remove the time and just focus on the date
-        _data["data"] = pd.to_datetime(_data["data"]).apply(lambda x: x.date())
-        self.data = _data.rename(columns={
+        self.data = self.calculate_days_passed(self.data)
+        self.get_features()
+        self.aggregate_data()
+        self.get_total_regions_data()
+        self.get_regions_data()
+        self.get_regions_list()
+        return self.data
+
+    def normalize_data_pcm_dpc(self):
+        self.data = self.data.rename(columns={
             "data": "date",
             "stato": "state",
             "codice_regione": "region_code",
@@ -44,13 +56,16 @@ class Data:
             "totale_casi": "feature_total_cases",
             "tamponi": "feature_total_tests"
         })
-        self.data = self.calculate_days_passed(self.data)
-        self.get_features()
-        self.aggregate_data()
-        self.get_total_regions_data()
-        self.get_regions_data()
-        self.get_regions_list()
         return self.data
+
+    def normalize_date(self):
+        self.data["date"] = pd.to_datetime(
+            self.data["date"]).apply(lambda x: x.date())
+        return self.data
+
+    def get_latest_update(self):
+        self.latest_update = self.data.tail(1)["date"].values[0]
+        return self.latest_update
 
     def get_features(self) -> List[str]:
         """

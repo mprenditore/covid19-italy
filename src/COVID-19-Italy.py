@@ -30,13 +30,14 @@ else:
     if data_rate == t.opt_day_to_day:
         data_rate = "day-to-day"
 
+st.text(f"{t.str_latest_update}: {data.latest_update}")
+
 pages = Page(data, t, mode=data_rate)
 page_function_mapping = {
     t.opt_temporal_trend: pages.line_plots,
     t.opt_geo_distribution: pages.map_choropleth,
 }
 page_function_mapping[page]()
-# page_function_mapping[page](data=data, t=t, mode=data_rate)
 
 st.subheader(t.str_warnings)
 st.warning(t.warnings_updates)
