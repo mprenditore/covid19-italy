@@ -1,7 +1,5 @@
-pandas==1.0.0
-numpy==1.18.1
+pandas==1.0.3
 altair==4.0.1
 streamlit==0.56.0
-python-dateutil==2.8.0
-pyyaml==5.3
+pyyaml==5.3.1
 cachetools==4.0.0
