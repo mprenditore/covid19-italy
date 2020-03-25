@@ -1,10 +1,8 @@
-title: "COVID-19 in Italia"
 sidebar_github: "Per contribuire o visualizzare il codice, visita [github](https://github.com/mprenditore/covid19-italy)"
 
-title_page: "Pagina"
-title_visualizations: "Visualizzaioni disponibili"
+title_page_italian: "COVID-19 in Italia"
+title_page_international: "COVID-19 in the World"
 
-md_visualizations_description: "Scegli se preferisci visualizzare il totale dell'indicatiore scelto o l'incremento/decremento giornaliero:"
 md_data_to_visualize: "Che dato vorresti visualizzare?"
 md_national_data: "Dati nazionali"
 md_regional_data: "Dati regionali"
@@ -28,14 +26,17 @@ label_regional_scale: Scala Regionale
 label_regions: Regioni
 label_days: Giorni
 label_page: Pagina
+label_source: "Sorgente dati"
 
 
 opt_total: totale
 opt_day_to_day: "giorno per giorno"
 opt_linear: lineare
 opt_logarithmic: logaritmica
-opt_temporal_trend: "Andamento temporale"
-opt_geo_distribution: "Distribuzione geografica"
+opt_page_temporal_trend: "Andamento temporale"
+opt_page_geo_distribution: "Distribuzione geografica"
+opt_source_italian: "Italia"
+opt_source_international: "Internazionale"
 
 feature_hospitalized_with_symptoms: "Ricoverati con sintomi"
 feature_people_in_icu: "Terapia intensiva"

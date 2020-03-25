@@ -14,4 +14,4 @@ enableCORS=false\n\
 port = ${PORT}\n\
 " > ~/.streamlit/config.toml
 
-streamlit run ${STREAMLIT_OPTIONS} COVID-19-Italy.py
+streamlit run ${STREAMLIT_OPTIONS} COVID-19-Dashboard.py

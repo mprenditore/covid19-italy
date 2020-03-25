@@ -26,7 +26,8 @@ class Page:
         features = self.data.features
         feature = st.selectbox(
             label=self.t.label_choose, options=features,
-            format_func=self.graph.formatter, index=8
+            index=self.data.source_config['def_feature_index'],
+            format_func=self.graph.formatter
         )
         return feature
 
@@ -42,8 +43,6 @@ class Page:
         return scale
 
     def radio_data_rate(self):
-        st.sidebar.title(self.t.title_visualizations)
-        st.sidebar.markdown(self.t.md_visualizations_description)
         data_rate = st.sidebar.radio(
                 label=self.t.label_visualizations,
                 options=[self.t.opt_total, self.t.opt_day_to_day])
@@ -61,7 +60,7 @@ class Page:
         """
         national = self.data.aggregated_data
 
-        st.title(self.t.title)
+        st.title(self.t.get(f"title_page_{self.data.source}"))
 
         self.radio_data_rate()
         feature = self.dropdown_scale()
@@ -102,7 +101,7 @@ class Page:
         regions = st.multiselect(
             label=self.t.label_regions,
             options=region_options,
-            default=["Lombardia", "Veneto", "Emilia Romagna"],
+            default=self.data.source_config['def_regions']
         )
 
         # Group data by date and region, sum up every feature,
@@ -141,8 +140,8 @@ class Page:
         Render chropleth of Italy with desired feature
         """
 
-        topo_url = "https://raw.githubusercontent.com/openpolis/geojson-italy/master/topojson/limits_IT_regions.topo.json"
-        topo_feature = "regions"
+        topo_url = self.data.source_config['choropleth']['url']
+        topo_feature = self.data.source_config['choropleth']['feature']
 
         st.title(self.t.title)
 

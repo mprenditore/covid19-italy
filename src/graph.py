@@ -44,7 +44,7 @@ class Graph:
                 y=alt.Y(f"{y_axis}:Q",
                         title=self.formatter(feature, suffix), scale=scale),
                 tooltip=[
-                    alt.Tooltip(f"{y_axis}",title=self.formatter(
+                    alt.Tooltip(f"{y_axis}", title=self.formatter(
                         feature, suffix)),
                     alt.Tooltip("date", title=self.t.str_date, type="temporal")
                 ]
@@ -110,8 +110,7 @@ class Graph:
             topo_url,
             topo_feature
         )
-        data.loc[:, "date"] = data["date"].apply(lambda x: x.isoformat())
-        data = data.where(data[feature] != 0, 1e-3)
+        chart_data = data[data[feature] > 0][[feature, "region_code"]]
 
         base_chart = (
             alt.Chart(regions_shape)
@@ -137,7 +136,7 @@ class Graph:
             .transform_lookup(
                 "properties.reg_istat_code_num",
                 from_=alt.LookupData(
-                    data=data, key="region_code", fields=[feature],
+                    data=chart_data, key="region_code", fields=[feature],
                 ),
             )
         )

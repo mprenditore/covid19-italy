@@ -1,10 +1,8 @@
-title: "COVID-19 in Italien"
 sidebar_github: "Besuchen Sie [github](https://github.com/mprenditore/covid19-italy), um einen Beitrag zu leisten oder den Code anzuzeigen"
 
-title_page: Seite
-title_visualizations: "Verfügbare Visualisierungen"
+title_page_italian: "COVID-19 in Italien"
+title_page_international: "COVID-19 in de Wereld"
 
-md_visualizations_description: "Wählen Sie, ob Sie lieber die Summe des ausgewählten Indikators oder das tägliche Inkrementieren oder Dekrementieren visualisieren möchten:"
 md_data_to_visualize: "Welchen Indikator möchten Sie visualisieren?"
 md_national_data: "Nationale Daten"
 md_regional_data: "Regionale Daten"
@@ -28,13 +26,16 @@ label_regional_scale: Regionale Skala
 label_regions: Regionen
 label_days: Tage
 label_page: Seite
+label_source: Databron
 
 opt_total: Insgesamt
 opt_day_to_day: "Tag zu Tag"
 opt_linear: linear
 opt_logarithmic: logarithmisch
-opt_temporal_trend: "Zeitlicher Trend"
-opt_geo_distribution: "Geografische Verteilung"
+opt_page_temporal_trend: "Zeitlicher Trend"
+opt_page_geo_distribution: "Geografische Verteilung"
+opt_source_italian: Italien
+opt_source_international: Internationale
 
 feature_hospitalized_with_symptoms: "In das Krankenhaus eingelieferten mit symptome"
 feature_people_in_icu: "Leute in Intensivstation"
