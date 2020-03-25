@@ -1,0 +1,53 @@
+sources:
+  italian:
+    csv:
+      - "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni.csv"
+    def_regions:
+      - Lombardia
+      - Veneto
+      - Emilia Romagna
+      - Lazio
+    def_feature_index: 8
+    choropleth:
+      url: "https://raw.githubusercontent.com/openpolis/geojson-italy/master/topojson/limits_IT_regions.topo.json"
+      feature: "regions"
+    pages:
+      - temporal_trend
+      - geo_distribution
+    no_feature_columns:
+      - date
+      - state
+      - region_code
+      - region_name
+      - lat
+      - long
+      - note_en
+      - note_it
+      - days_passed
+  international:
+    csv:
+      - column: feature_total_cases
+        url: "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv"
+      - column: feature_deaths
+        url: "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv"
+    def_regions:
+      - Italy
+      - Spain
+      - France
+      - United Kingdom
+      - US
+      - Germany
+      - Malta
+    def_feature_index: 0
+    choropleth:
+      url: "https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json"
+      feature: "regions"
+    pages:
+      - temporal_trend
+    no_feature_columns:
+      - date
+      - state
+      - region_name
+      - lat
+      - long
+      - days_passed

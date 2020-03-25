@@ -1,6 +1,7 @@
 import datetime
 import pandas as pd
 from typing import List
+from config import Config
 from translation import Translate
 from cachetools import cached, TTLCache
 cache = TTLCache(maxsize=10, ttl=60)
@@ -8,38 +9,44 @@ cache = TTLCache(maxsize=10, ttl=60)
 
 @cached(cache)
 class Data:
-    csv_url = "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni.csv"
     data = None
     aggregated_data = None
     total_regions_data = None
     regions_data = None
     regions_list = None
     t = None
+    source = None
+    source_config = None
     n_days = 0
     features = []
     extended_features = []
     latest_update = "1970-01-01 00:00:00"
 
-    def __init__(self, lang: str = "English"):
-        self.data = self.get_data()
-        self.features = self.get_features()
+    def __init__(self, source: str, lang: str = "English"):
+        self.source = source
+        self.source_config = Config().sources.get(self.source)
         self.t = Translate(lang)
+        self.data = self.get_data()
 
     def get_data(self):
-        self.data = pd.read_csv(self.csv_url)
-        self.normalize_data_pcm_dpc()
-        self.get_latest_update()
+        get_data_mapping = {
+            'italian': self.get_data_pcm_dpc,
+            'international': self.get_data_csse
+        }
+        self.data = get_data_mapping[self.source]()
         self.normalize_date()
-        # Remove the time and just focus on the date
+        self.get_latest_update()
         self.data = self.calculate_days_passed(self.data)
-        self.get_features()
+        self.get_features(self.source_config['no_feature_columns'])
+        # Remove the time and just focus on the date
         self.aggregate_data()
         self.get_total_regions_data()
         self.get_regions_data()
         self.get_regions_list()
         return self.data
 
-    def normalize_data_pcm_dpc(self):
+    def get_data_pcm_dpc(self):
+        self.data = pd.read_csv(self.source_config['csv'][0])
         self.data = self.data.rename(columns={
             "data": "date",
             "stato": "state",
@@ -58,6 +65,29 @@ class Data:
         })
         return self.data
 
+    def get_data_csse(self):
+        all_data = []
+        for csv in self.source_config['csv']:
+            _data = (pd.read_csv(csv['url']))
+            _data = _data.rename(columns={
+                'Province/State': "state",
+                "Country/Region": "region_name",
+                "Lat": "lat",
+                "Long": "long"
+            })
+            _data = _data.melt(
+                id_vars=["state", "region_name", "lat", "long"],
+                var_name="date",
+                value_name=csv['column'])
+            _data = _data.loc[_data[csv['column']] > 10]
+            _data = _data[[
+                "date", "state", "region_name", "lat", "long", csv['column']]]
+            all_data.append(_data)
+        self.data = pd.merge(all_data[0], all_data[1], how='left',
+                             on=['date', 'state', 'region_name',
+                                 'lat', 'long'])
+        return self.data
+
     def normalize_date(self):
         self.data["date"] = pd.to_datetime(
             self.data["date"]).apply(lambda x: x.date())
@@ -67,21 +97,13 @@ class Data:
         self.latest_update = self.data.tail(1)["date"].values[0]
         return self.latest_update
 
-    def get_features(self) -> List[str]:
+    def get_features(self, columns: List[str]) -> List[str]:
         """
         Gets features from data, i.e. all columns except date, state,
             region_code, region_name, lat, long
         """
         self.features = self.data.drop(
-            columns=[
-                "date",
-                "state",
-                "region_code",
-                "region_name",
-                "lat",
-                "long",
-                "days_passed"
-            ]
+            columns=columns
         ).columns.tolist()
         return self.features
 

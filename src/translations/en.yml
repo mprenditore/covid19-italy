@@ -1,10 +1,8 @@
-title: "COVID-19 in Italy"
 sidebar_github: "To contribute or view the code, please see [github](https://github.com/mprenditore/covid19-italy)"
 
-title_page: Page
-title_visualizations: "Available visualizations"
+title_page_italian: "COVID-19 in Italy"
+title_page_international: "COVID-19 in the World"
 
-md_visualizations_description: "Choose if you prefer to visualize the total of the chosen indicator or the day-to-day increment or decrement:"
 md_data_to_visualize: "What indicator would you like to visualize?"
 md_national_data: "National data"
 md_regional_data: "Regional data"
@@ -28,13 +26,16 @@ label_regional_scale: Regional scale
 label_regions: Regions
 label_days: Days
 label_page: Page
+label_source: "Data source"
 
 opt_total: total
 opt_day_to_day: "day to day"
 opt_linear: linear
 opt_logarithmic: logarithmic
-opt_temporal_trend: "Temporal trend"
-opt_geo_distribution: "Geographical distribution"
+opt_page_temporal_trend: "Temporal trend"
+opt_page_geo_distribution: "Geographical distribution"
+opt_source_italian: Italy
+opt_source_international: International
 
 feature_hospitalized_with_symptoms: "Hospitalized with symptoms"
 feature_people_in_icu: "People in ICU"
