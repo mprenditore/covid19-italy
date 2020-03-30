@@ -20,26 +20,25 @@ source_selbox = st.sidebar.selectbox(
     label=t.label_source, options=source_options, index=0
 )
 source = source_mapping[source_selbox]
-
-
 data = Data(source=source, lang=language)
+if not data.data.empty:
+    pages = [t.get(f'opt_page_{s}')
+             for s in data.source_config.get('pages')]
+    page_type = st.sidebar.selectbox(
+        label=t.label_page, options=pages,
+        index=0
+    )
+    page = Page(data, t)
+    page_function_mapping = {
+        t.opt_page_temporal_trend: page.line_plots,
+        t.opt_page_geo_distribution: page.map_choropleth,
+    }
+    st.text(f"{t.str_latest_update}: {data.latest_update}")
+    page_function_mapping[page_type]()
 
-pages = [t.get(f'opt_page_{s}')
-         for s in data.source_config.get('pages')]
-page_type = st.sidebar.selectbox(
-    label=t.label_page, options=pages,
-    index=0
-)
-page = Page(data, t)
-page_function_mapping = {
-    t.opt_page_temporal_trend: page.line_plots,
-    t.opt_page_geo_distribution: page.map_choropleth,
-}
-st.text(f"{t.str_latest_update}: {data.latest_update}")
-page_function_mapping[page_type]()
-
-st.subheader(t.str_warnings)
-st.warning(t.warnings_updates)
-
-st.markdown(t.md_footer)
-st.sidebar.title(t.sidebar_github)
+    st.subheader(t.str_warnings)
+    st.warning(t.warn_updates)
+    st.markdown(t.md_footer)
+    st.sidebar.title(t.sidebar_github)
+else:
+    st.error(t.error_source)
