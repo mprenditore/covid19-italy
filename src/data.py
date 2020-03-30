@@ -26,28 +26,23 @@ class Data:
         self.source = source
         self.source_config = Config().sources.get(self.source)
         self.t = Translate(lang)
-        self.data = self.get_data()
-
-    def get_data(self):
-        get_data_mapping = {
-            'italian': self.get_data_pcm_dpc,
-            'international': self.get_data_csse
-        }
-        self.data = get_data_mapping[self.source]()
+        self.data = getattr(self, "get_data_" + self.source,
+                            pd.DataFrame)()
+        if self.data.empty:
+            return
         self.normalize_date()
-        self.get_latest_update()
+        self.set_latest_update()
         self.data = self.calculate_days_passed(self.data)
-        self.get_features(self.source_config['no_feature_columns'])
+        self.set_features(self.source_config['no_feature_columns'])
         # Remove the time and just focus on the date
         self.aggregate_data()
-        self.get_total_regions_data()
-        self.get_regions_data()
-        self.get_regions_list()
-        return self.data
+        self.set_total_regions_data()
+        self.set_regions_data()
+        self.set_regions_list()
 
-    def get_data_pcm_dpc(self):
-        self.data = pd.read_csv(self.source_config['csv'][0])
-        self.data = self.data.rename(columns={
+    def get_data_ita(self):
+        _data = pd.read_csv(self.source_config['csv'][0])
+        _data = _data.rename(columns={
             "data": "date",
             "stato": "state",
             "codice_regione": "region_code",
@@ -63,9 +58,9 @@ class Data:
             "totale_casi": "feature_total_cases",
             "tamponi": "feature_total_tests"
         })
-        return self.data
+        return _data
 
-    def get_data_csse(self):
+    def get_data_glo(self):
         all_data = []
         for csv in self.source_config['csv']:
             _data = (pd.read_csv(csv['url']))
@@ -83,21 +78,21 @@ class Data:
             _data = _data[[
                 "date", "state", "region_name", "lat", "long", csv['column']]]
             all_data.append(_data)
-        self.data = pd.merge(all_data[0], all_data[1], how='left',
+        _data = pd.merge(all_data[0], all_data[1], how='left',
                              on=['date', 'state', 'region_name',
                                  'lat', 'long'])
-        return self.data
+        return _data
 
     def normalize_date(self):
         self.data["date"] = pd.to_datetime(
             self.data["date"]).apply(lambda x: x.date())
         return self.data
 
-    def get_latest_update(self):
+    def set_latest_update(self):
         self.latest_update = self.data.tail(1)["date"].values[0]
-        return self.latest_update
+        return
 
-    def get_features(self, columns: List[str]) -> List[str]:
+    def set_features(self, columns: List[str]) -> List[str]:
         """
         Gets features from data, i.e. all columns except date, state,
             region_code, region_name, lat, long
@@ -105,7 +100,7 @@ class Data:
         self.features = self.data.drop(
             columns=columns
         ).columns.tolist()
-        return self.features
+        return
 
     def calculate_delta(self, data, feature: str):
         suffix = "delta"
@@ -144,19 +139,19 @@ class Data:
     def get_on_days_passed(self, data, days):
         return data[data["days_passed"] == days]
 
-    def get_total_regions_data(self):
+    def set_total_regions_data(self):
         self.total_regions_data = self.data.groupby(
             ["date", "region_name"], as_index=False
         ).sum()
-        return self.total_regions_data
+        return
 
-    def get_regions_data(self):
+    def set_regions_data(self):
         self.regions_data = self.total_regions_data.groupby("region_name")
-        return self.regions_data
+        return
 
-    def get_regions_list(self):
+    def set_regions_list(self):
         self.regions_list = self.data["region_name"].unique().tolist()
-        return self.regions_list
+        return
 
     def get_selected_regions_data(self, regions: List[str]):
         _selected_regions = self.total_regions_data[

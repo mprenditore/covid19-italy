@@ -1,13 +1,10 @@
 sidebar_github: "Besuchen Sie [github](https://github.com/mprenditore/covid19-italy), um einen Beitrag zu leisten oder den Code anzuzeigen"
 
-title_page_italian: "COVID-19 in Italien"
-title_page_international: "COVID-19 in de Wereld"
+title_p_ita: "COVID-19 in Italien"
+title_p_glo: "COVID-19 in de Wereld"
 
 md_data_to_visualize: "Welchen Indikator möchten Sie visualisieren?"
-md_national_data: "Nationale Daten"
-md_regional_data: "Regionale Daten"
 md_growth_factor: "Wachstumsfaktor"
-md_per_region: "Situation in verschiedenen Regionen"
 md_growth_factor_description_1: "Der Zuwachsfaktor is der multiplikant der exponentiellen Wachstumskurve, welcher so ausgerechnet wird:"
 md_growth_factor_description_2: "
   wo $cases_n$ für die Anzahl der eingetragenen Fällen, am $n$, steht. Beispielsweise, wenn 300 Fälle gestern eingetragen
@@ -18,11 +15,16 @@ md_footer: |
   (Ministero della Salute) en uitgewerkt door Dipartimento della Protezione Civile. Dit werk is dan ook
   een afgeleide van [COVID-19 Italia - Monitoraggio situazione] (https://github.com/pcm-dpc/COVID-19) gelicentieerd
   onder [CC BY 4.0] (https://creativecommons.org/licenses/by/4.0/)
+md_p_ita_aggregated_data: "Nationale Daten"
+md_p_ita_selected_data: "Daten pro Region"
+md_p_glo_aggregated_data: "Global daten"
+md_p_glo_selected_data: "Daten pro Land"
+md_p_ita_per_selected: "Situation in verschiedenen Regionen"
+md_p_glo_per_selected: "Situation in einem anderen Land"
 
 label_visualizations: "Verfügbare Visualisierungen"
 label_choose: "Wähle..."
-label_national_scale: Nationale Skala
-label_regional_scale: Regionale Skala
+label_scale: Skala
 label_regions: Regionen
 label_days: Tage
 label_page: Seite
@@ -34,8 +36,8 @@ opt_linear: linear
 opt_logarithmic: logarithmisch
 opt_page_temporal_trend: "Zeitlicher Trend"
 opt_page_geo_distribution: "Geografische Verteilung"
-opt_source_italian: Italien
-opt_source_international: Internationale
+opt_source_ita: Italien
+opt_source_glo: Global
 
 feature_hospitalized_with_symptoms: "In das Krankenhaus eingelieferten mit symptome"
 feature_people_in_icu: "Leute in Intensivstation"
@@ -60,13 +62,15 @@ str_cases: Fälle
 str_chosen_date: "Gewähltes datum"
 str_latest_update: "Laatste update"
 
-warnings_no_sel_region: "Keine region ausgewählt!"
-warnings_no_info_for_sel_data: "Keine Informationen verügbar für das ausgewählte Datum"
-
-warnings_updates: |
+warn_ita_no_sel_region: "Keine Region ausgewählt!"
+warn_glo_no_sel_region: "Kein Land ausgewählt!"
+warn_no_info_for_sel_data: "Keine Informationen verügbar für das ausgewählte Datum"
+warn_updates: |
   - 07/03/2020: gegevens van Brescia +300 positieve resultaten
   - 10/03/2020: gegevens uit Lombardia zijn gedeeltelijk.
   - 11/03/2020: gegevens van Abruzzo zijn niet doorgekomen.
   - 16/03/2020: gegevens van P.A. Trento en Puglia kwamen niet door.
   - 17/03/2020: gegevens van de provincie Rimini worden niet bijgewerkt.
   - 18/03/2020: gegevens van Campania en provincie Parma zijn niet doorgekomen.
+
+error_source: "Die ausgewählte Quelle wird noch nicht unterstützt"
