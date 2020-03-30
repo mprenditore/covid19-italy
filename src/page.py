@@ -12,6 +12,7 @@ cache = TTLCache(maxsize=10, ttl=60)
 @cached(cache)
 class Page:
     data = None
+    source = None
     t = None
     graph = None
     data_rate = ""
@@ -19,6 +20,7 @@ class Page:
     def __init__(self, data: Data, t: Translate):
         self.data = data
         self.t = t
+        self.source = self.data.source
         self.graph = Graph(data, t)
 
     def dropdown_scale(self):
@@ -31,10 +33,11 @@ class Page:
         )
         return feature
 
-    def radio_scale(self, label: str):
+    def radio_scale(self, label: str, id: str):
         choice = st.radio(label=label, options=[
                 self.t.opt_linear,
-                self.t.opt_logarithmic])
+                self.t.opt_logarithmic],
+                key=f"{label}_{id}_{self.source}")
         scale = (
             alt.Scale(type="symlog")
             if choice == self.t.opt_logarithmic
@@ -60,7 +63,7 @@ class Page:
         """
         national = self.data.aggregated_data
 
-        st.title(self.t.get(f"title_page_{self.data.source}"))
+        st.title(self.t.get(f"title_p_{self.source}"))
 
         self.radio_data_rate()
         feature = self.dropdown_scale()
@@ -68,9 +71,9 @@ class Page:
         # Group data by date and calculate log of interested feature
 
         # Choose log scale or linear, defines what feature to use
-        national_scale = self.radio_scale(self.t.label_national_scale)
+        national_scale = self.radio_scale(self.t.label_scale, 'global')
 
-        st.header(self.t.md_national_data)
+        st.header(self.t.get(f"md_p_{self.source}_aggregated_data"))
         suffix = "" if self.data_rate == "total" else "delta"
 
         national_chart = self.graph.render_global_chart(
@@ -94,7 +97,7 @@ class Page:
             national, feature, suffix, national_scale, self.t.axis_month_day)
         st.write(national_growth_chart)
 
-        st.header(self.t.md_per_region)
+        st.header(self.t.get(f"md_p_{self.source}_per_selected"))
 
         # Get list of regions and select the ones of interest
         region_options = self.data.regions_list
@@ -108,31 +111,26 @@ class Page:
         # filter ones in regions selection
         selected_regions = self.data.get_selected_regions_data(regions)
 
-        regional_scale = self.radio_scale(self.t.label_regional_scale)
+        regional_scale = self.radio_scale(self.t.label_scale, 'selected')
 
         suffix = "" if self.data_rate == "total" else "delta"
 
-        st.subheader(self.t.md_regional_data)
+        st.subheader(self.t.get(f"md_p_{self.source}_selected_data"))
 
-        regional_chart = self.graph.render_regional_chart(
-            selected_regions, feature, suffix, regional_scale,
-            self.t.axis_month_day, self.t.axis_region)
         if selected_regions.empty:
-            st.warning(self.t.warnings_no_sel_region)
+            st.warning(self.t.get(f"warn_p_{self.source}_no_sel_region"))
         else:
+            regional_chart = self.graph.render_regional_chart(
+                selected_regions, feature, suffix, regional_scale,
+                self.t.axis_month_day, self.t.axis_region)
             st.write(regional_chart)
 
-        suffix = "growth"
-
-        st.subheader(self.t.md_growth_factor)
-
-        regional_growth_chart = self.graph.render_regional_chart(
-            selected_regions, feature, suffix, regional_scale,
-            self.t.axis_month_day, self.t.axis_region,
-            legend_position="bottom-left")
-        if selected_regions.empty:
-            st.warning(self.t.warnings_no_sel_region)
-        else:
+            suffix = "growth"
+            st.subheader(self.t.md_growth_factor)
+            regional_growth_chart = self.graph.render_regional_chart(
+                selected_regions, feature, suffix, regional_scale,
+                self.t.axis_month_day, self.t.axis_region,
+                legend_position="bottom-left")
             st.write(regional_growth_chart)
 
     def map_choropleth(self) -> None:
@@ -143,7 +141,7 @@ class Page:
         topo_url = self.data.source_config['choropleth']['url']
         topo_feature = self.data.source_config['choropleth']['feature']
 
-        st.title(self.t.title)
+        st.title(self.t.get(f"title_p_{self.source}"))
 
         feature = self.dropdown_scale()
 
@@ -162,7 +160,7 @@ class Page:
             self.data.data, chosen_n_days)
 
         if filtered_data.empty:
-            st.warning(self.t.warnings_no_info_for_sel_date)
+            st.warning(self.t.warn_no_info_for_sel_date)
         else:
             choropleth = self.graph.render_regions_choropleth(
                 filtered_data, topo_url, topo_feature, feature,

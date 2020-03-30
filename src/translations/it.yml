@@ -1,13 +1,10 @@
 sidebar_github: "Per contribuire o visualizzare il codice, visita [github](https://github.com/mprenditore/covid19-italy)"
 
-title_page_italian: "COVID-19 in Italia"
-title_page_international: "COVID-19 in the World"
+title_p_ita: "COVID-19 in Italia"
+title_p_glo: "COVID-19 in the World"
 
 md_data_to_visualize: "Che dato vorresti visualizzare?"
-md_national_data: "Dati nazionali"
-md_regional_data: "Dati regionali"
 md_growth_factor: "Fattore di crescita"
-md_per_region: "Divisione per regione"
 md_growth_factor_description_1: "Il fattore di crescita è il moltiplicatore della curva esponenziale di crescita, calcolato come:"
 md_growth_factor_description_2: "
   dove $casi_n$ indica il numero di casi per il giorno $n$. Ad esempio, se ieri fossero stati registrati 300 casi
@@ -18,16 +15,20 @@ md_footer: |
   Dipartimento della Protezione Civile. Questo progetto è quindi un derivato di [COVID-19 Italia - Monitoraggio
   situazione](https://github.com/pcm-dpc/COVID-19) che è liberamente utilizzabile sotto licenza
   [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+md_p_ita_aggregated_data: "Dati nazionali"
+md_p_ita_selected_data: "Dati per Regione"
+md_p_glo_aggregated_data: "Dati globali"
+md_p_glo_selected_data: "Dati per Paese"
+md_p_ita_per_selected: "Situazione nelle diverse Regioni"
+md_p_glo_per_selected: "Situazione nei diversi Paesi"
 
 label_visualizations: "Visualizzazioni disponibili"
 label_choose: "Scegli..."
-label_national_scale: Scala Nazionale
-label_regional_scale: Scala Regionale
+label_scale: Scala
 label_regions: Regioni
 label_days: Giorni
 label_page: Pagina
 label_source: "Sorgente dati"
-
 
 opt_total: totale
 opt_day_to_day: "giorno per giorno"
@@ -35,8 +36,8 @@ opt_linear: lineare
 opt_logarithmic: logaritmica
 opt_page_temporal_trend: "Andamento temporale"
 opt_page_geo_distribution: "Distribuzione geografica"
-opt_source_italian: "Italia"
-opt_source_international: "Internazionale"
+opt_source_ita: "Italia"
+opt_source_glo: "Mondo"
 
 feature_hospitalized_with_symptoms: "Ricoverati con sintomi"
 feature_people_in_icu: "Terapia intensiva"
@@ -61,12 +62,15 @@ str_cases: casi
 str_chosen_date: "Data scelta"
 str_latest_update: "Ultimo aggiornamento"
 
-warnings_no_sel_region: "Nessuna regione selezionata!"
-warnings_no_info_for_sel_date: "Nessuna informatione disponibile per la data selezionata"
-warnings_updates: |
+warn_ita_no_sel_region: "Nessuna regione selezionata!"
+warn_glo_no_sel_region: "Nessun paese selezionato!"
+warn_no_info_for_sel_date: "Nessuna informatione disponibile per la data selezionata"
+warn_updates: |
   - 07/03/2020: dati Brescia +300 esiti positivi
   - 10/03/2020: dati Regione Lombardia parziali.
   - 11/03/2020: dati Regione Abruzzo non pervenuti.
   - 16/03/2020: dati P.A. Trento e Puglia non pervenuti.
   - 17/03/2020: dati Provincia di Rimini non aggiornati.
   - 18/03/2020: dati Regione Campania e Provincia di Parma non pervenuti.
+
+error_source: "La sorgente selezionata non e ancora supportata"

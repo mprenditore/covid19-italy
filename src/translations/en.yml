@@ -1,13 +1,10 @@
 sidebar_github: "To contribute or view the code, please see [github](https://github.com/mprenditore/covid19-italy)"
 
-title_page_italian: "COVID-19 in Italy"
-title_page_international: "COVID-19 in the World"
+title_p_ita: "COVID-19 in Italy"
+title_p_glo: "COVID-19 in the World"
 
 md_data_to_visualize: "What indicator would you like to visualize?"
-md_national_data: "National data"
-md_regional_data: "Regional data"
 md_growth_factor: "Growth factor"
-md_per_region: "Situation in different regions"
 md_growth_factor_description_1: "The growth factor is the multiplier of the exponential growth curve, calculated as:"
 md_growth_factor_description_2: "
   where $cases_n$ stands for the number of cases registered on day $n$. For example, if 300 cases were registered
@@ -18,11 +15,16 @@ md_footer: |
   (Ministero della Salute) and elaborated by Dipartimento della Protezione Civile. This work is therefore
   a derivative of [COVID-19 Italia - Monitoraggio situazione](https://github.com/pcm-dpc/COVID-19) licensed
   under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+md_p_ita_aggregated_data: "National data"
+md_p_ita_selected_data: "Per Region data"
+md_p_glo_aggregated_data: "Global data"
+md_p_glo_selected_data: "Per Country data"
+md_p_ita_per_selected: "Situation in different Regions"
+md_p_glo_per_selected: "Situation in different Countries"
 
 label_visualizations: "Available visualizations"
 label_choose: "Choose..."
-label_national_scale: National scale
-label_regional_scale: Regional scale
+label_scale: Scale
 label_regions: Regions
 label_days: Days
 label_page: Page
@@ -34,8 +36,8 @@ opt_linear: linear
 opt_logarithmic: logarithmic
 opt_page_temporal_trend: "Temporal trend"
 opt_page_geo_distribution: "Geographical distribution"
-opt_source_italian: Italy
-opt_source_international: International
+opt_source_ita: Italy
+opt_source_glo: World
 
 feature_hospitalized_with_symptoms: "Hospitalized with symptoms"
 feature_people_in_icu: "People in ICU"
@@ -60,12 +62,15 @@ str_cases: cases
 str_chosen_date: "Chosen date"
 str_latest_update: "Latest update"
 
-warnings_no_sel_region: "No selected region!"
-warnings_no_info_for_sel_data: "No information is available for the selected date"
-warnings_updates: |
+warn_p_ita_no_sel_region: "No selected Region!"
+warn_p_glo_no_sel_region: "No selected Country!"
+warn_no_info_for_sel_data: "No information is available for the selected date"
+warn_updates: |
   - 07/03/2020: data from Brescia +300 positive results
   - 10/03/2020: data from Lombardia is partial.
   - 11/03/2020: data from Abruzzo did not come through.
   - 16/03/2020: data from P.A. Trento and Puglia did not come through.
   - 17/03/2020: data from the Province of Rimini is not updated.
   - 18/03/2020: data from Campania and Province of Parma did not come through.
+
+error_source: "Selected source is not yet supported"
