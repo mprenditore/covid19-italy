@@ -5,7 +5,7 @@ sources:
     def_regions:
       - Lombardia
       - Veneto
-      - Emilia Romagna
+      - Emilia-Romagna
       - Lazio
     def_feature_index: 8
     choropleth:
