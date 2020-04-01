@@ -10,11 +10,17 @@ md_growth_factor_description_2: "
   dove $casi_n$ indica il numero di casi per il giorno $n$. Ad esempio, se ieri fossero stati registrati 300 casi
   e oggi 400, il fattore di crescita sarebbe 1.33, dato che $\\frac{400}{300} = 1.33$."
 md_elapsed_days: "Scegli che data visualizzare come numero di giorni dalla prima raccolta dati, il 24 febbraio:"
-md_footer: |
+md_p_ita_footer: |
   Tutti i dati visualizzati in questa dashboard provengono dal Ministero della Salute e sono forniti dal
   Dipartimento della Protezione Civile. Questo progetto è quindi un derivato di [COVID-19 Italia - Monitoraggio
   situazione](https://github.com/pcm-dpc/COVID-19) che è liberamente utilizzabile sotto licenza
   [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+md_p_glo_footer: |
+  Tutti i dati visualizzati in questa dashboard provengono dal Johns Hopkins University Center for
+  Systems Science and Engineering (JHU CSSE).
+  Supportato anche da ESRI Living Atlas Team e la Johns Hopkins University Applied Physics Lab (JHU APL).
+  Questo progetto é quindi un derivato di [Novel Coronavirus (COVID-19) Cases, provided by JHU CSSE]
+  (https://github.com/CSSEGISandData/COVID-19) copyright 2020 Johns Hopkins University.
 md_p_ita_aggregated_data: "Dati nazionali"
 md_p_ita_selected_data: "Dati per Regione"
 md_p_glo_aggregated_data: "Dati globali"
@@ -64,7 +70,7 @@ str_latest_update: "Ultimo aggiornamento"
 warn_ita_no_sel_region: "Nessuna regione selezionata!"
 warn_glo_no_sel_region: "Nessun paese selezionato!"
 warn_no_info_for_sel_date: "Nessuna informatione disponibile per la data selezionata"
-warn_updates: |
+warn_p_ita_updates: |
   - 07/03/2020: dati Brescia +300 esiti positivi
   - 10/03/2020: dati Regione Lombardia parziali.
   - 11/03/2020: dati Regione Abruzzo non pervenuti.
