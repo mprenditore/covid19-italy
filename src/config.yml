@@ -2,11 +2,7 @@ sources:
   ita:
     csv:
       - "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni.csv"
-    def_regions:
-      - Lombardia
-      - Veneto
-      - Emilia-Romagna
-      - Lazio
+    show_warnings: true
     def_feature_index: 7
     def_regions_count: 7
     choropleth:
@@ -34,14 +30,6 @@ sources:
       - column: feature_deaths
         url: "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv"
     def_regions_count: 7
-    def_regions:
-      - Italy
-      - Spain
-      - France
-      - United Kingdom
-      - US
-      - Germany
-      - Malta
     choropleth:
       url: "https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json"
       feature: "regions"

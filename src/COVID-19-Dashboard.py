@@ -36,9 +36,10 @@ if not data.data.empty:
     st.text(f"{t.str_latest_update}: {data.latest_update}")
     page_function_mapping[page_type]()
 
-    st.subheader(t.str_warnings)
-    st.warning(t.warn_updates)
-    st.markdown(t.md_footer)
+    if data.source_config.get("show_warnings", False):
+        st.subheader(t.str_warnings)
+        st.warning(t.get(f"warn_p_{source}_updates"))
+    st.markdown(t.get(f"md_p_{source}_footer"))
     st.sidebar.title(t.sidebar_github)
 else:
     st.error(t.error_source)

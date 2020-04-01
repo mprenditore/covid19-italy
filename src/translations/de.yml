@@ -10,11 +10,17 @@ md_growth_factor_description_2: "
   wo $cases_n$ für die Anzahl der eingetragenen Fällen, am $n$, steht. Beispielsweise, wenn 300 Fälle gestern eingetragen
   worden sind und heute 400, ist der Wachstumsfaktor 1.33, weil $\\frac{400}{300} = 1.33$."
 md_elapsed_days: "Wählen Sie das Datum aus, welches als Anzahl der Tage angezeigt werden soll, die seit der ersten Datenerfassung am 24. Februar vergangen sind:"
-md_footer: |
+md_p_ita_footer: |
   Alle gegevens in dit dashboard zijn afkomstig van het Italiaanse ministerie van Volksgezondheid
   (Ministero della Salute) en uitgewerkt door Dipartimento della Protezione Civile. Dit werk is dan ook
   een afgeleide van [COVID-19 Italia - Monitoraggio situazione] (https://github.com/pcm-dpc/COVID-19) gelicentieerd
   onder [CC BY 4.0] (https://creativecommons.org/licenses/by/4.0/)
+md_p_glo_footer: |
+  Alle in diesem Dashboard angezeigten Daten werden vom Johns Hopkins University Center for
+  Systems Science and Engineering (JHU CSSE).
+  Unterstützt auch vom ESRI Living Atlas Team und dem Johns Hopkins University Applied Physics Lab (JHU APL).
+  Diese Arbeit ist daher ein Derivat von [neuartigen Coronavirus (COVID-19) -Fällen, bereitgestellt von JHU CSSE]
+  (https://github.com/CSSEGISandData/COVID-19) Copyright 2020 Johns Hopkins University
 md_p_ita_aggregated_data: "Nationale Daten"
 md_p_ita_selected_data: "Daten pro Region"
 md_p_glo_aggregated_data: "Global daten"
@@ -64,7 +70,7 @@ str_latest_update: "Laatste update"
 warn_ita_no_sel_region: "Keine Region ausgewählt!"
 warn_glo_no_sel_region: "Kein Land ausgewählt!"
 warn_no_info_for_sel_data: "Keine Informationen verügbar für das ausgewählte Datum"
-warn_updates: |
+warn_p_ita_updates: |
   - 07/03/2020: gegevens van Brescia +300 positieve resultaten
   - 10/03/2020: gegevens uit Lombardia zijn gedeeltelijk.
   - 11/03/2020: gegevens van Abruzzo zijn niet doorgekomen.
