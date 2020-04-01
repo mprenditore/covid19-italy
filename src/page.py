@@ -28,7 +28,7 @@ class Page:
         features = self.data.features
         feature = st.selectbox(
             label=self.t.label_choose, options=features,
-            index=self.data.source_config['def_feature_index'],
+            index=self.data.source_config.get('def_feature_index', 0),
             format_func=self.graph.formatter
         )
         return feature
@@ -104,7 +104,7 @@ class Page:
         regions = st.multiselect(
             label=self.t.label_regions,
             options=region_options,
-            default=self.data.source_config['def_regions']
+            default=self.data.get_regions_default(feature)
         )
 
         # Group data by date and region, sum up every feature,

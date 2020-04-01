@@ -51,8 +51,9 @@ class Data:
             "terapia_intensiva": "feature_people_in_icu",
             "totale_ospedalizzati": "feature_total_hospitalized",
             "isolamento_domiciliare": "feature_people_in_domestic_isolation",
-            "totale_attualmente_positivi": "feature_total_current_positives",
-            "nuovi_attualmente_positivi": "feature_new_current_positives",
+            "totale_positivi": "feature_total_positives",
+            "nuovi_positivi": "feature_new_positives",
+            "variazione_totale_positivi": "feature_variation_total_positives",
             "dimessi_guariti": "feature_people_discharged_and_recovered",
             "deceduti": "feature_deaths",
             "totale_casi": "feature_total_cases",
@@ -74,13 +75,13 @@ class Data:
                 id_vars=["state", "region_name", "lat", "long"],
                 var_name="date",
                 value_name=csv['column'])
-            _data = _data.loc[_data[csv['column']] > 10]
+            _data = _data.loc[_data[csv['column']] > 0]
             _data = _data[[
                 "date", "state", "region_name", "lat", "long", csv['column']]]
             all_data.append(_data)
         _data = pd.merge(all_data[0], all_data[1], how='left',
-                             on=['date', 'state', 'region_name',
-                                 'lat', 'long'])
+                         on=['date', 'state', 'region_name',
+                             'lat', 'long'])
         return _data
 
     def normalize_date(self):
@@ -148,6 +149,11 @@ class Data:
     def set_regions_data(self):
         self.regions_data = self.total_regions_data.groupby("region_name")
         return
+
+    def get_regions_default(self, feature: str):
+        return self.regions_data.max().sort_values(
+            feature).tail(self.source_config.get(
+                "def_regions_count", 5)).index.tolist()
 
     def set_regions_list(self):
         self.regions_list = self.data["region_name"].unique().tolist()
