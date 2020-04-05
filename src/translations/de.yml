@@ -77,5 +77,7 @@ warn_p_ita_updates: |
   - 16/03/2020: gegevens van P.A. Trento en Puglia kwamen niet door.
   - 17/03/2020: gegevens van de provincie Rimini worden niet bijgewerkt.
   - 18/03/2020: gegevens van Campania en provincie Parma zijn niet doorgekomen.
+  - 29/03/2020: gegevens van Emilia-Romagna zijn gedeeltelijk (Pufferdaten nicht aktualisiert).
+  - 26/03/2020: gegevens van Piemonte zijn gedeeltelijk (-50 verstorben - späte Mitteilung).
 
 error_source: "Die ausgewählte Quelle wird noch nicht unterstützt"
