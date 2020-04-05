@@ -50,4 +50,4 @@ This work is therefore a derivative of [COVID-19 Italia - Monitoraggio situazion
 ### World data
 
 All the data displayed in this dashboard is provided by the Johns Hopkins University Center for Systems Science and Engineering (JHU CSSE). Also, Supported by ESRI Living Atlas Team and the Johns Hopkins University Applied Physics Lab (JHU APL).
-This work is therefore a derivative of [Novel Coronavirus (COVID-19) Cases, provided by JHU CSSE] (https://github.com/CSSEGISandData/COVID-19) copyright 2020 Johns Hopkins University.
+This work is therefore a derivative of [Novel Coronavirus (COVID-19) Cases, provided by JHU CSSE](https://github.com/CSSEGISandData/COVID-19) copyright 2020 Johns Hopkins University.
